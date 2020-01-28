@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  h1.text-center.mt-3= title
+  p.text-center.mt-3 #{secondaryTitle}
+  .container
+    - var messages = getMessages()
+    if messages.success
+        .alert.alert-success(role='alert') #[strong Well done!] !{messages.success}
+    if messages.warning
+        .alert.alert-danger(role='alert') #[strong Oh snap!] !{messages.warning}
+    .row
+      if (comments.length)
+        each comment, i in comments
+          .col-sm-6.mt-2
+            .card
+              h3.card-header #{comment.comment_id}
+                if (comment.title.length)
+                  = '. ' 
+                = comment.title
+              .card-block 
+                if (comment.body.length)
+                  p.card-text.font-weight-bold.font-italic
+                    span.d-sm-block.text-gray-dark.font-weight-normal Comment:
+                    = comment.body
+                if (comment.reader.length)
+                  p.card-text.font-weight-bold.font-italic
+                    span.d-sm-block.text-gray-dark.font-weight-normal Commented By:
+                    = comment.reader
+                if (comment.reader.length == 0 && comment.body.length == 0)
+                  p.card-text.font-weight-bold.text-center
+                    .alert.alert-success(role='alert') #[strong No Data Available]
+                a.card-link(href='../comments/edit/'+comment.comment_id) Edit Comment
+                a.card-link(href='javascript:void(0);', onclick="confimrDeleteComment(" + comment.comment_id + ")") Delete Comment
+                a.card-link(href='../comments/view/'+comment.comment_id) View Comment
+              .card-footer.text-muted= comment.comment_created
+      else
+        h3 No Comments Added Yet

@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1.text-center.mt-3= title
+  p.text-center.mt-3 #{secondaryTitle}
+  .container
+    - var messages = getMessages()
+    if messages.success
+        .alert.alert-success(role='alert') #[strong Well done!] !{messages.success}
+    if messages.warning
+        .alert.alert-danger(role='alert') #[strong Oh snap!] !{messages.warning}
+    .row
+      if (posts.length)
+        each post, i in posts
+          .col-sm-12.mt-1
+            .card
+              h3.card-header #{post.post_id}
+                if (post.title.length)
+                  = '. ' 
+                = post.title
+              .card-block 
+                if (post.author.length)
+                  p.card-text.font-weight-bold.font-italic
+                    span.d-sm-block.text-gray-dark.font-weight-normal Author
+                    = post.author
+                if (post.slug.length)
+                  p.card-text.font-weight-bold.font-italic
+                    span.d-sm-block.text-gray-dark.font-weight-normal Slug
+                    = post.slug
+                if (post.content.length)
+                  p.card-text.font-weight-bold.font-italic
+                    span.d-sm-block.text-gray-dark.font-weight-normal Content
+                    = post.content
+                if (post.content.length == 0 && post.slug.length == 0  && post.author.length == 0)
+                  p.card-text.font-weight-bold.text-center
+                    .alert.alert-success(role='alert') #[strong No Data Available]
+                a.card-link(href='../posts/edit/'+post.post_id) Edit Post
+                a.card-link(href='javascript:void(0);', onclick="confimrDelete(" + post.post_id + ")") Delete Post
+                a.card-link(href='../posts/view/'+post.post_id) View Post
+              .card-footer.text-muted= post.post_created
+      else
+        h3 No Posts Created Yet

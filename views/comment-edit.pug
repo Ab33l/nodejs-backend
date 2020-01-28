@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1.text-center.mt-3= title
+  .container
+    form(method='post', action='/comments/edit/'+comments[0].comment_id).pt-3
+      .row
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='post_id') Post Number
+            input.form-control(type='number', value=comments[0].post_id, placeholder='Post Number', id='post_id', name='post_id' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='body') Comment
+            input.form-control(type='text', value=comments[0].body, placeholder='Comment', id='body', name='body' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='reader') Reader
+            input.form-control(type='text',value=comments[0].reader, placeholder='Reader', id='reader', name='reader' required)
+        .col-sm-6
+      button.btn.btn-primary.col-sm-2(type='submit') Update Comment

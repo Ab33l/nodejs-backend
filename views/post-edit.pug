@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1.text-center.mt-3= title
+  .container
+    form(method='post', action='/posts/edit/'+posts[0].post_id).pt-3
+      .row
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='title') Title
+            input.form-control(type='text', value=posts[0].title, placeholder='title', id='title', name='title' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='author') Author
+            input.form-control(type='text', value=posts[0].author, placeholder='Author', id='author', name='author' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='slug') Slug
+            input.form-control(type='text',value=posts[0].slug, placeholder='Slug', id='slug', name='slug' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='content') Content
+            input.form-control(type='text',value=posts[0].content, placeholder='Content', id='content', name='content' required)
+        .col-sm-6
+      button.btn.btn-primary.col-sm-2(type='submit') Update Post

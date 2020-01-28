@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  h1.text-center.mt-3= title
+  p.text-center.mt-3.text-muted Welcome #{secondaryTitle}
+  .container
+    if (posts.length)
+      .card.mt-5
+        h3.card-header #{posts[0].post_id}
+          if (posts[0].title.length)
+            = ', ' 
+          = posts[0].title
+        .card-block
+          if (posts[0].author.length)
+            .row.mt-3
+              .col-sm-2
+                p.card-text.font-weight-bold
+                  span.d-sm-block.text-gray-dark.font-weight-normal Author:
+              .col-sm-10
+                p.card-text.font-weight-bold.font-italic
+                  = posts[0].author
+          if (posts[0].slug.length)
+            .row.mt-3
+              .col-sm-2
+                p.card-text.font-weight-bold
+                  span.d-sm-block.text-gray-dark.font-weight-normal Slug
+              .col-sm-10
+                p.card-text.font-weight-bold.font-italic
+                  = posts[0].slug
+          if (posts[0].content.length)
+            .row.mt-3
+              .col-sm-2
+                p.card-text.font-weight-bold
+                  span.d-sm-block.text-gray-dark.font-weight-normal Content
+              .col-sm-10
+                p.card-text.font-weight-bold.font-italic
+                  = posts[0].content
+          if (posts[0].content.length == 0 && posts[0].slug.length == 0  && posts[0].author.length == 0)
+            p.card-text.font-weight-bold.text-center
+              .alert.alert-success(role='alert') #[strong No Data Available] 
+          .mt-5
+            a.card-link(href='/posts/edit/'+posts[0].post_id) Edit Post
+            a.card-link(href='javascript:void(0);', onclick="confimrDelete("+ posts[0].post_id +")") Delete Post
+        .card-footer.text-muted= posts[0].post_created
+    else
+      h3 No Post Created Yet

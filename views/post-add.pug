@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1.text-center.mt-3= title
+  p.text-center.mt-3 #{secondaryTitle}
+  .container
+    form(method='post', action='/posts/add').pt-3
+      .row
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='title') Title
+            input.form-control(type='text', placeholder='Title', id='title', name='title' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='author') Author
+            input.form-control(type='text', placeholder='Author', id='author', name='author' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='slug') Slug
+            input.form-control(type='text', placeholder='Slug', id='slug', name='slug' required)
+        .col-sm-6
+          .form-group
+            label.col-form-label.mb-2(for='content') Content
+            input.form-control(type='text', placeholder='Content', id='content', name='content' required)
+        .col-sm-6
+          .form-group
+            input.form-control(type='hidden', placeholder='Post Created', id='post_created', name='post_created', value=moment().format("YYYY-MM-DD k:mm:ss"))
+        .col-sm-6
+      button.btn.btn-primary.col-sm-2(type='submit') Submit
