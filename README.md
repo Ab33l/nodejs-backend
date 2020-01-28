@@ -6,13 +6,9 @@ npm install
 
 # Make changes to the Database configurations in app.js
 host: 'localhost',
-
 user: 'root', // mysql username
-
 password : '', // mysql password
-
 port : 3306, //port mysql
-
 database:'scompass'	 // mysql database name
 
 # Starting the node server
